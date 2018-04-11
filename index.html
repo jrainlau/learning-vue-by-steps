@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div>{{name}}</div>
+    <div>{{id}}</div>
+  </div>
+
+  <script>
+    const bindingMark = 'data-element-binding'
+
+    function Euv (id, initData) {
+      const self = this
+            el = self.el = document.getElementById(id)
+            data = self.data = {}
+            bindings = {}
+            /*
+             * Step 1: 把模板替换成html
+            **/
+            content = el.innerHTML.replace(/\{\{(.*)\}\}/g, (match, variable) => {
+              bindings[variable] = {}
+              return `<span ${bindingMark}='${variable}'><span>`
+            })
+      el.innerHTML = content
+      
+      /*
+       * Step 2: 把data对象转化为响应式对象
+      **/
+      for (variable in bindings) {
+        bind(variable)
+      }
+      
+      /*
+       * Step 3: 赋值给data对象
+      **/
+      if (initData) {
+        for (var variable in initData) {
+          data[variable] = initData[variable]
+        }
+      }
+
+      function bind (variable) {
+        bindings[variable].els = el.querySelectorAll(`[${bindingMark}="${variable}"]`)
+        Object.defineProperty(data, variable, {
+          set (newVal) {
+            bindings[variable].els.forEach((elm) => {
+              bindings[variable].value = elm.textContent = newVal
+            })
+          },
+          get () {
+            return bindings[variable].value
+          }
+        })
+      }
+    }
+
+    new Euv('app', {
+      name: 'xxx'
+    })
+  </script>
+</body>
+</html>
