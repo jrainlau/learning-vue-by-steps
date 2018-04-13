@@ -22,7 +22,6 @@ export default class Watcher {
     // 触发对应属性的getter
     // getter会把this赋值给Dep.target，然后推入订阅数组当中
     // 搞定之后清空Dep.target
-    console.log(`Init watcher by exp: ${this.exp}`);
     Dep.target = this
     this._getNewVal()
     Dep.target = null

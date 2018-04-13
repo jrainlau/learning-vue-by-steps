@@ -26,8 +26,13 @@
         }
       },
       computed: {
-        parents() {
-          return `${this.family.father} and ${this.family.mom}`
+        parents: {
+          get () {
+            return `${this.family.father} and ${this.family.mom}`
+          },
+          set (val) {
+            this.name = val + '!!!'
+          }
         }
       }
     })
