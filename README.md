@@ -1,5 +1,7 @@
 ![](./脑图.png)
 
+![](./原理.png)
+
 1. 原生data经过Observe递归改造。
 
 2. Observe会为data所有属性添加getter/setter，变成observableData。
