@@ -36,6 +36,7 @@ export default function Compile (el, vm) {
 
         // 针对e-model指令进行双向数据绑定
         if (node.nodeType === 1) {
+          console.log(node);
           const nodeAttr = node.attributes
           Array.from(nodeAttr).forEach((attr) => {
             const attrName = attr.name
