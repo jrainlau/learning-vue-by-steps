@@ -12,7 +12,6 @@ function Observe (data) {
         return val
       },
       set (newVal) {
-        console.log(`Setting key "${key}" to new value "${newVal}"`);
         if (val === newVal) return
         val = newVal
         observe(newVal)

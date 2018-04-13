@@ -8,12 +8,11 @@
 </head>
 <body>
   <div id="app">
-    <input type="text" e-model="name">
-    <h1>
-      {{name}}
-      <p>{{family.father}}</p>
-    </h1>
-    <div>{{family.mom}}</div>
+    <div>
+      <span>Name:</span>
+      <input type="text" e-model="name">
+      <p>Hello, my name is {{name}}, and my parents are {{parents}}!</p>
+    </div>
   </div>
   <script type="module">
     import Euv from './src/main.js'
@@ -23,7 +22,12 @@
         name: 'Euv',
         family: {
           father: 'Jrain',
-          mom: 'Jrain, too'
+          mom: 'Ago'
+        }
+      },
+      computed: {
+        parents() {
+          return `${this.family.father} and ${this.family.mom}`
         }
       }
     })
